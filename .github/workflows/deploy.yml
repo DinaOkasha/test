@@ -22,18 +22,18 @@ jobs:
 
     - name: Create /var/www/html/ directory on EC2
       run: |
-          ssh -o StrictHostKeyChecking=no ec2-user@34.253.80.92 "sudo mkdir -p /var/www/html"
-          ssh -o StrictHostKeyChecking=no ec2-user@34.253.80.92 "sudo chown -R nginx:nginx /var/www/html"
-          ssh -o StrictHostKeyChecking=no ec2-user@34.253.80.92 "sudo chmod -R 755 /var/www/html"
+        ssh -o StrictHostKeyChecking=no ec2-user@34.253.80.92 "sudo mkdir -p /var/www/html"
+        ssh -o StrictHostKeyChecking=no ec2-user@34.253.80.92 "sudo chown -R nginx:nginx /var/www/html"
+        ssh -o StrictHostKeyChecking=no ec2-user@34.253.80.92 "sudo chmod -R 755 /var/www/html"
 
     - name: Set permissions for /var/www/html/
       run: |
-            ssh -o StrictHostKeyChecking=no ec2-user@34.253.80.92 "sudo chown -R ec2-user:ec2-user /var/www/html"
-            ssh -o StrictHostKeyChecking=no ec2-user@34.253.80.92 "sudo chmod -R 755 /var/www/html"
+        ssh -o StrictHostKeyChecking=no ec2-user@34.253.80.92 "sudo chown -R ec2-user:ec2-user /var/www/html"
+        ssh -o StrictHostKeyChecking=no ec2-user@34.253.80.92 "sudo chmod -R 755 /var/www/html"
 
     - name: Copy index.html to EC2
       run: |
-        sudo scp -o StrictHostKeyChecking=no index.html ec2-user@34.253.80.92:/var/www/html/
+        scp -o StrictHostKeyChecking=no index.html ec2-user@34.253.80.92:/var/www/html/
 
 
     - name: Restart web server (optional)
