@@ -1,0 +1,28 @@
+name: Deploy to EC2
+
+on:
+  push:
+    branches:
+      - main
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+
+    steps:
+    - name: Checkout repository
+      uses: actions/checkout@v3
+
+    - name: Set up SSH
+      run: |
+        mkdir -p ~/.ssh
+        echo "${{ secrets.EC2_SSH_KEY }}" > ~/.ssh/id_rsa
+        chmod 600 ~/.ssh/id_rsa
+
+    - name: Copy index.html to EC2
+      run: |
+        scp -o StrictHostKeyChecking=no index.html 34.253.80.92@ec2-user:/var/www/html/
+
+    - name: Restart web server (optional)
+      run: |
+        ssh -o StrictHostKeyChecking=no 34.253.80.92@ec2-user "sudo systemctl restart nginx"
