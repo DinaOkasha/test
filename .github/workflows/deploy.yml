@@ -28,7 +28,7 @@ jobs:
 
     - name: Copy index.html to EC2
       run: |
-        sudo scp -o StrictHostKeyChecking=no index.html ec2-user@34.253.80.92:/var/www/html/index.html
+        sudo scp -o StrictHostKeyChecking=no index.html ec2-user@34.253.80.92:/var/www/html/
 
 
     - name: Restart web server (optional)
